@@ -46,8 +46,13 @@ input NewPasswordWithCodeInput {
 }
 
 input RegisterInput {
-    name: String! @rules(apply: ["required", "string"])
-    email: String! @rules(apply: ["required", "email"])
+    nombre: String
+    apellido:String
+    ci:String
+    telefono:String
+    genero:Genero
+    email: String!
+    estado:Estado
     password: String! @rules(apply: ["required", "confirmed", "min:8"])
     password_confirmation: String!
 }

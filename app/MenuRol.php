@@ -2,9 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class MenuRol extends Model
+class MenuRol extends Pivot
 {
     //
+    protected $fillable = [
+        'menu_id'	,'rol_id'
+    ];
 }

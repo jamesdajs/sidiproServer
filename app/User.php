@@ -15,7 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'nombre',
+        'apellido',	'ci',	'telefono',	'genero',	'estado',
+    	'email',	'password'
     ];
 
     /**
@@ -35,4 +37,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function distribuitors()
+    {
+        return $this->belongsToMany(Distribuitor::class);
+    }
+    public function deliverypoints()
+    {
+        return $this->belongsToMany(DeliveryPoint::class);
+    }
+    public function deliverypointdistribuitor()
+    {
+        return $this->belongsToMany(DeliveryPointDistribuitor::class);
+    }
+
 }

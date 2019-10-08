@@ -1,0 +1,31 @@
+enum Genero {
+    MASCULINO @enum(value: "0")
+    FEMENINO @enum(value: "1")
+}
+enum Estado {
+    ACTIVO @enum(value: "0")
+    INACTIVO @enum(value: "1")
+    ELIMINADO @enum(value: "2")
+}
+type User {
+    id: ID!
+    nombre: String!
+    apellido:String!
+    ci:String!
+    telefono:String!
+    genero:Genero!
+    email: String!
+    estado:Estado!
+
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+input UserInput {
+    nombre: String
+    apellido:String
+    ci:String
+    telefono:String
+    genero:Genero
+    email: String
+    estado:Estado
+}

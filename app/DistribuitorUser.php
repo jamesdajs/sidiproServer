@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class DeliveryPointUser extends Pivot
+class DistributorUser extends Pivot
 {
     protected $fillable = [
-        'delivery_point_id',	'user_id',	'rol_id'
+        'distributor_id',	'user_id',	'rol_id'
     ];
     public function rol()
     {

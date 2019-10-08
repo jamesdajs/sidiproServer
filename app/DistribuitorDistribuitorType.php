@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class DeliveryPointDistribuitorProduct extends Pivot
+class DistributorDistributorType extends Pivot
 {
     protected $fillable = [
-        'del_id',	'product_id'
+        'distribuitor_id',	'distribuitor_type_id'
     ];
 }
