@@ -6,8 +6,12 @@ type Product{
     descripcion:String!
     foto:String!
     estado:Estado!
+    cantidad:Int!
 	created_at:DateTime!
 	updated_at:DateTime!
+    
+	deli_points_dis:[DeliveryPointDistribuitor!]! @belongsToMany
+    producttype:ProductType! @belongsTo
 }
 extend type Query {
     products: [Product!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Product")
@@ -24,5 +28,6 @@ input ProductInput{
 	precio:Int
     descripcion:String
     foto:String
+    cantidad:Int
     estado:Estado
 }

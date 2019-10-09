@@ -21,7 +21,9 @@ type User {
     created_at: DateTime!
     updated_at: DateTime!
 
-    users:[Distribuitor!]! @belongsToMany
+    distribuitors:[Distribuitor!]! @belongsToMany
+    deliverypoints:[DeliveryPoint!]! @belongsToMany
+	deli_points_dis:[DeliveryPointDistribuitor!]! @belongsToMany
 }
 input UserInput {
     nombre: String

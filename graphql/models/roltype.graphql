@@ -4,6 +4,8 @@ type RolType{
 	estado:Estado!
 	created_at:DateTime!
 	updated_at:DateTime!
+	
+	rols:[Rol!]! @hasMany
 }
 extend type Query {
     rolTypes: [RolType!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\RolType")

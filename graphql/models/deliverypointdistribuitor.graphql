@@ -9,7 +9,7 @@ type DeliveryPointDistribuitor{
 	updated_at:DateTime!
     
     users:[User!]! @belongsToMany
-
+	products:[Product!]! @belongsToMany
 }
 extend type Query {
     DeliveryPointDistribuitors: [DeliveryPointDistribuitor!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\DeliveryPointDistribuitor")

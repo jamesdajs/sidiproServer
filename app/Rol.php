@@ -29,7 +29,7 @@ class Rol extends Model
     {
         return $this->hasMany(DistribuitorUser::class);
     }
-    public function deliveryusers()
+    public function deliverypointusers()
     {
         return $this->hasMany(DeliveryPointUser::class);
     }

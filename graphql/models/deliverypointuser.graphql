@@ -1,0 +1,27 @@
+type DeliveryPointUser{
+    id:ID!
+	delivery_point_id:Int!
+	user_id:Int!
+	rol_id:Int!
+	created_at:DateTime!
+	updated_at:DateTime!
+    
+    deliverypoint:DeliveryPoint! @belongsTo
+	user:User! @belongsTo
+	rol:Rol! @belongsTo
+}
+extend type Query {
+    deliveryPointUsers: [DeliveryPointUser!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\DeliveryPointUser")
+	deliveryPointUser(id: ID @eq):DeliveryPointUser @middleware(checks: ["auth:api"]) @find(model: "App\\DeliveryPointUser")
+}
+extend type Mutation{
+    createDeliveryPointUser(input: DeliveryPointUserInput @spread): DeliveryPointUser! @create @middleware(checks: ["auth:api"])
+    updateDeliveryPointUser(id: ID!, input: DeliveryPointUserInput @spread): DeliveryPointUser @update @middleware(checks: ["auth:api"])
+    deleteDeliveryPointUser(id: ID!): DeliveryPointUser @delete @middleware(checks: ["auth:api"])
+} 
+
+input DeliveryPointUserInput{
+	delivery_point_id:Int!
+	user_id:Int!
+	rol_id:Int!
+}

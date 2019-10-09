@@ -45,7 +45,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(DeliveryPoint::class);
     }
-    public function deliverypointdistribuitor()
+    public function deli_points_dis()
     {
         return $this->belongsToMany(DeliveryPointDistribuitor::class);
     }

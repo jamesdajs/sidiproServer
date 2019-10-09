@@ -1,0 +1,27 @@
+type DistribuitorUser{
+    id:ID!
+	distribuitor_id:Int!
+	user_id:Int!
+	rol_id:Int!
+	created_at:DateTime!
+	updated_at:DateTime!
+
+	distribuitor:Distribuitor! @belongsTo
+	user:User! @belongsTo
+	rol:Rol! @belongsTo
+}
+extend type Query {
+    distribuitorUsers: [DistribuitorUser!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\DistribuitorUser")
+	distribuitorUser(id: ID @eq):DistribuitorUser @middleware(checks: ["auth:api"]) @find(model: "App\\DistribuitorUser")
+}
+extend type Mutation{
+    createDistribuitorUser(input: DistribuitorUserInput @spread): DistribuitorUser! @create @middleware(checks: ["auth:api"])
+    updateDistribuitorUser(id: ID!, input: DistribuitorUserInput @spread): DistribuitorUser @update @middleware(checks: ["auth:api"])
+    deleteDistribuitorUser(id: ID!): DistribuitorUser @delete @middleware(checks: ["auth:api"])
+} 
+
+input DistribuitorUserInput{
+	distribuitor_id:Int
+	user_id:Int
+	rol_id:Int
+}

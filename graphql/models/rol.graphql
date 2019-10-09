@@ -7,6 +7,9 @@ type Rol{
 	updated_at:DateTime!
 
     menus: [Menu!]! @belongsToMany
+    roltype: [RolType!]! @belongsTo
+    distribuitorusers:[DistribuitorUser!]! @hasMany
+    deliverypointusers:[DeliveryPointUser]! @hasMany
 }
 extend type Query {
     rols: [Rol!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Rol")

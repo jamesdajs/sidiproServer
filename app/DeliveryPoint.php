@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeliveryPoint extends Model
 {
+
+    public $incrementing = true;
     protected $fillable = [
         'nombre',	'direccion',	'descripcion',	'foto',	'lat',	'lng',	'telefono',	'estado'
 ];

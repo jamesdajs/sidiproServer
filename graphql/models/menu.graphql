@@ -6,6 +6,7 @@ type Menu{
     estado:Estado!
 	created_at:DateTime!
 	updated_at:DateTime!
+    rols:[Rol!]! @belongsToMany
 }
 extend type Query {
     menus: [Menu!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Menu")

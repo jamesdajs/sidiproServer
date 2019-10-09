@@ -13,11 +13,12 @@ class CreateDistributorUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('distributor_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('distributor_id');
+        Schema::create('distribuitor_user', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('distribuitor_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('rol_id');
-            $table->foreign('distributor_id')->references('id')->on('distribuitors')
+            $table->foreign('distribuitor_id')->references('id')->on('distribuitors')
             ->onDelete('cascade')
             ->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')

@@ -18,7 +18,7 @@ class CreateDeliveryPointDistribuitorsTable extends Migration
             $table->unsignedBigInteger('delivery_point_id');
             $table->unsignedBigInteger('distribuitor_id');
             $table->double('total');
-            $table->timestamp('fecha_entrega');
+            $table->timestamp('fecha_entrega')->nullable();
             $table->enum('estado',[0,1,2])->default(0);
             $table->foreign('delivery_point_id')->references('id')->on('delivery_points')
             ->onDelete('cascade')

@@ -17,7 +17,8 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_type_id');
             $table->text('nombre');
-            $table->integer('precio');
+            $table->double('precio');
+            $table->double('cantidad');
             $table->text('descripcion');
             $table->text('foto');
             $table->enum('estado',[0,1,2])->default(0);

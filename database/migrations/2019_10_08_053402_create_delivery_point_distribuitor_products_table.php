@@ -14,8 +14,12 @@ class CreateDeliveryPointDistribuitorProductsTable extends Migration
     public function up()
     {
         Schema::create('delivery_point_distribuitor_product', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->unsignedBigInteger('del_id');
             $table->unsignedBigInteger('product_id');
+            $table->double('precio_venta');
+            $table->double('cantidad');
+            $table->enum('estado',[0,1,2])->default(0);
             $table->timestamps();
             $table->foreign('del_id')->references('id')->on('delivery_point_distribuitor')
             ->onDelete('cascade')

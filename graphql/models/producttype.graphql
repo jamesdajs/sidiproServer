@@ -5,6 +5,9 @@ type ProductType{
     estado:Estado!
 	created_at:DateTime!
 	updated_at:DateTime!
+
+    distribuitor:Distribuitor! @belongsTo
+    products:[Product!]! @hasMany
 }
 extend type Query {
     ProductTypes: [ProductType!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\ProductType")
