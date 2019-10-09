@@ -1,0 +1,28 @@
+type Product{
+    id:ID!
+	product_type_id:Int!
+    nombre:String!
+	precio:Int!
+    descripcion:String!
+    foto:String!
+    estado:Estado!
+	created_at:DateTime!
+	updated_at:DateTime!
+}
+extend type Query {
+    products: [Product!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Product")
+	product(id: ID @eq):Product @middleware(checks: ["auth:api"]) @find(model: "App\\Product")
+}
+extend type Mutation{
+    createProduct(input: ProductInput @spread): Product! @create @middleware(checks: ["auth:api"])
+    updateProduct(id: ID!, input: ProductInput @spread): Product @update @middleware(checks: ["auth:api"])
+    deleteProduct(id: ID!): Product @delete @middleware(checks: ["auth:api"])
+} 
+input ProductInput{
+	product_type_id:Int
+    nombre:String
+	precio:Int
+    descripcion:String
+    foto:String
+    estado:Estado
+}

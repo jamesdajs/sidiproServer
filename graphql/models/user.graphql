@@ -1,3 +1,4 @@
+
 enum Genero {
     MASCULINO @enum(value: "0")
     FEMENINO @enum(value: "1")
@@ -19,6 +20,8 @@ type User {
 
     created_at: DateTime!
     updated_at: DateTime!
+
+    users:[Distribuitor!]! @belongsToMany
 }
 input UserInput {
     nombre: String

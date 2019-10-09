@@ -1,0 +1,31 @@
+type DeliveryPointDistribuitor{
+    id:ID!
+	delivery_point_id:Int!
+	distribuitor_id:Int!
+	total:Int!
+	fecha_entrega:DateTime!
+	estado:Estado!
+	created_at:DateTime!
+	updated_at:DateTime!
+    
+    users:[User!]! @belongsToMany
+
+}
+extend type Query {
+    DeliveryPointDistribuitors: [DeliveryPointDistribuitor!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\DeliveryPointDistribuitor")
+	DeliveryPointDistribuitor(id: ID @eq):DeliveryPointDistribuitor @middleware(checks: ["auth:api"]) @find(model: "App\\DeliveryPointDistribuitor")
+}
+extend type Mutation{
+    createDeliveryPointDistribuitor(input: DeliveryPointDistribuitorInput @spread): DeliveryPointDistribuitor! @create @middleware(checks: ["auth:api"])
+    updateDeliveryPointDistribuitor(id: ID!, input: DeliveryPointDistribuitorInput @spread): DeliveryPointDistribuitor @update @middleware(checks: ["auth:api"])
+    deleteDeliveryPointDistribuitor(id: ID!): DeliveryPointDistribuitor @delete @middleware(checks: ["auth:api"])
+} 
+
+input DeliveryPointDistribuitorInput{
+	delivery_point_id:Int!
+	distribuitor_id:Int!
+	total:Int!
+	fecha_entrega:DateTime!
+	estado:Estado!
+	estado:Estado
+}

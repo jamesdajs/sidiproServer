@@ -1,0 +1,28 @@
+enum Super {
+    DELIVERY @enum(value: "0")
+    DISTRIBUITOR @enum(value: "1")
+}
+type Favorite{
+    id:ID!	
+	delivery_point_id:Int!	
+	distribuitor_id:Int!	
+	super:Super!	
+	estrelas:Int!
+	created_at:DateTime!
+	updated_at:DateTime!
+}
+extend type Query {
+    favorites: [Favorite!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Favorite")
+	favorite(id: ID @eq):Favorite @middleware(checks: ["auth:api"]) @find(model: "App\\Favorite")
+}
+extend type Mutation{
+    createFavorite(input: FavoriteInput @spread): Favorite! @create @middleware(checks: ["auth:api"])
+    updateFavorite(id: ID!, input: FavoriteInput @spread): Favorite @update @middleware(checks: ["auth:api"])
+    deleteFavorite(id:ID!): Favorite @delete @middleware(checks: ["auth:api"])
+} 
+input FavoriteInput{
+	delivery_point_id:Int!	
+	distribuitor_id:Int!	
+	super:Super!	
+	estrelas:Int!
+}

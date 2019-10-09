@@ -1,0 +1,38 @@
+type Distribuitor{
+    id:ID!
+	nombre:String!
+	direccion:String!	
+    descripcion:String!	
+    foto:String!	
+    lat:String!
+    lng:String!
+	telefono:String!
+	email:String!
+	estado:Estado!
+	created_at:DateTime!
+	updated_at:DateTime!
+    
+    users:[User!]! @belongsToMany
+
+}
+extend type Query {
+    distribuitors: [Distribuitor!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Distribuitor")
+	distribuitor(id: ID @eq):Distribuitor @middleware(checks: ["auth:api"]) @find(model: "App\\Distribuitor")
+}
+extend type Mutation{
+    createDistribuitor(input: DistribuitorInput @spread): Distribuitor! @create @middleware(checks: ["auth:api"])
+    updateDistribuitor(id: ID!, input: DistribuitorInput @spread): Distribuitor @update @middleware(checks: ["auth:api"])
+    deleteDistribuitor(id: ID!): Distribuitor @delete @middleware(checks: ["auth:api"])
+} 
+
+input DistribuitorInput{
+	nombre:String
+	direccion:String
+    descripcion:String
+    foto:String
+    lat:String
+    lng:String
+	telefono:String
+	email:String
+	estado:Estado
+}

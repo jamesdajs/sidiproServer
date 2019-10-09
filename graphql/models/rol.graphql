@@ -1,0 +1,24 @@
+type Rol{
+    id:ID!
+	rol_type_id:Int!
+    nombre:String!
+    estado:Estado!
+	created_at:DateTime!
+	updated_at:DateTime!
+
+    menus: [Menu!]! @belongsToMany
+}
+extend type Query {
+    rols: [Rol!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Rol")
+	rol(id: ID @eq):Rol @middleware(checks: ["auth:api"]) @find(model: "App\\Rol")
+}
+extend type Mutation{
+    createRol(input: RolInput @spread): Rol! @create @middleware(checks: ["auth:api"])
+    updateRol(id: ID!, input: RolInput @spread): Rol @update @middleware(checks: ["auth:api"])
+    deleteRol(id: ID!): Rol @delete @middleware(checks: ["auth:api"])
+} 
+input RolInput{
+	rol_type_id:Int
+    nombre:String
+    estado:Estado
+}

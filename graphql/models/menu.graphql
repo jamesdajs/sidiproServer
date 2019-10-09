@@ -1,0 +1,24 @@
+type Menu{
+    id:ID!
+	nombre:String!	
+    url:String!	
+    detalle:String!
+    estado:Estado!
+	created_at:DateTime!
+	updated_at:DateTime!
+}
+extend type Query {
+    menus: [Menu!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\Menu")
+	menu(id: ID @eq):Menu @middleware(checks: ["auth:api"]) @find(model: "App\\Menu")
+}
+extend type Mutation{
+    createMenu(input: MenuInput @spread): Menu! @create @middleware(checks: ["auth:api"])
+    updateMenu(id: ID!, input: MenuInput @spread): Menu @update @middleware(checks: ["auth:api"])
+    deleteMenu(id: ID!): Menu @delete @middleware(checks: ["auth:api"])
+} 
+input MenuInput{
+	nombre:String
+    url:String
+    detalle:String
+    estado:Estado
+}

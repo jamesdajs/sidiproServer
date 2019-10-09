@@ -1,0 +1,36 @@
+type DeliveryPoint{
+    id:ID!
+	nombre:String!
+	direccion:String!	
+    descripcion:String!	
+    foto:String!	
+    lat:String!
+    lng:String!
+	telefono:String!
+	estado:Estado!
+	created_at:DateTime!
+	updated_at:DateTime!
+    
+    users:[User!]! @belongsToMany
+
+}
+extend type Query {
+    DeliveryPoints: [DeliveryPoint!]! @middleware(checks: ["auth:api"]) @paginate(type: "paginator" model: "App\\DeliveryPoint")
+	DeliveryPoint(id: ID @eq):DeliveryPoint @middleware(checks: ["auth:api"]) @find(model: "App\\DeliveryPoint")
+}
+extend type Mutation{
+    createDeliveryPoint(input: DeliveryPointInput @spread): DeliveryPoint! @create @middleware(checks: ["auth:api"])
+    updateDeliveryPoint(id: ID!, input: DeliveryPointInput @spread): DeliveryPoint @update @middleware(checks: ["auth:api"])
+    deleteDeliveryPoint(id: ID!): DeliveryPoint @delete @middleware(checks: ["auth:api"])
+} 
+
+input DeliveryPointInput{
+	nombre:String
+	direccion:String
+    descripcion:String
+    foto:String
+    lat:String
+    lng:String
+	telefono:String
+	estado:Estado
+}

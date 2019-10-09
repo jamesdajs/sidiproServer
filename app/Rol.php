@@ -16,7 +16,14 @@ class Rol extends Model
     }
     public function menus()
     {
-        return $this->belongsToMany(Menu::class);
+        return $this->belongsToMany(Menu::class)
+        ->using(MenuRol::class)
+        ->withPivot([
+            'menu_id',
+            'rol_id',
+            'created_by',
+            'updated_by'
+        ]);
     }
     public function distribuitorusers()
     {
